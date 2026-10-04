@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Начисление{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Добавить начисление</h2>
+    <form method="post">
+        <label>
+            Квартира
+            <input name="account_id" type="number" required>
+        </label>
+        <label>
+            Период
+            <input name="period" type="month" required>
+        </label>
+        <label>
+            Сумма
+            <input name="amount" type="number" step="0.01" required>
+        </label>
+        <label>
+            Услуга
+            <input name="service_type" placeholder="Коммунальные">
+        </label>
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Оборотная ведомость{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Оборотная ведомость за {{ year }} год</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Квартира</th>
+                <th>Месяц</th>
+                <th>Начислено</th>
+                <th>Платежи</th>
+                <th>Сальдо на конец</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in rows %}
+            <tr>
+                <td>{{ r.account_id }}</td>
+                <td>{{ r.month_num }}</td>
+                <td>{{ r.charges }}</td>
+                <td>{{ r.payments }}</td>
+                <td>{{ r.saldo_end }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

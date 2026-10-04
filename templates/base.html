@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}lab3{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Учёт коммунальных платежей — lab3</h1>
+        <nav>
+            <a href="{{ url_for('index') }}">Главная</a>
+            <a href="{{ url_for('charges') }}">Начисления</a>
+            <a href="{{ url_for('payments') }}">Платежи</a>
+            <a href="{{ url_for('saldo') }}">Сальдо</a>
+            <a href="{{ url_for('report_turnover') }}">Оборотная ведомость</a>
+            <a href="{{ url_for('report_account', account_id=1) }}">По квартире</a>
+            <a href="{{ url_for('report_debtors') }}">Должники</a>
+        </nav>
+    </header>
+    <main>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flash">
+            {% for m in messages %}
+            <li>{{ m }}</li>{% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

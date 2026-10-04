@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Платёж{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Добавить платёж</h2>
+    <form method="post">
+        <label>
+            Квартира
+            <input name="account_id" type="number" required>
+        </label>
+        <label>
+            Период
+            <input name="period" type="month" required>
+        </label>
+        <label>
+            Сумма
+            <input name="amount" type="number" step="0.01" required>
+        </label>
+        <label>
+            Дата поступления
+            <input name="pay_date" type="date" required>
+        </label>
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+{% endblock %}

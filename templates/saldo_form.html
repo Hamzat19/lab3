@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Сальдо{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Ввести сальдо</h2>
+    <form method="post">
+        <label>
+            Квартира
+            <input name="account_id" type="number" required>
+        </label>
+        <label>
+            Период
+            <input name="period" type="month" required>
+        </label>
+        <label>
+            Сальдо на начало
+            <input name="saldo_begin" type="number" step="0.01" required>
+        </label>
+        <label>
+            Сальдо на конец
+            <input name="saldo_end" type="number" step="0.01" required>
+        </label>
+        <button type="submit">Сохранить</button>
+    </form>
+</div>
+{% endblock %}

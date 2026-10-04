@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Главная — lab3{% endblock %}
+{% block content %}
+<div class="card">
+    <h2>Лабораторная работа №3</h2>
+    <ul class="menu">
+        <li><a href="{{ url_for('charges') }}">Добавить начисление</a></li>
+        <li><a href="{{ url_for('payments') }}">Добавить платёж</a></li>
+        <li><a href="{{ url_for('saldo') }}">Ввести сальдо</a></li>
+        <li><a href="{{ url_for('report_turnover') }}">Оборотная ведомость</a></li>
+        <li><a href="{{ url_for('report_account', account_id=1) }}">Оборотная ведомость по квартире</a></li>
+        <li><a href="{{ url_for('report_debtors') }}">Сводка по должникам</a></li>
+    </ul>
+</div>
+{% endblock %}
