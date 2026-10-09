@@ -1,8 +1,33 @@
 {% extends "base.html" %}
 {% block title %}Квартира {{ account_id }}{% endblock %}
 {% block content %}
+<div class="breadcrumb">
+    <a href="{{ url_for('index') }}">Главная</a> /
+    <a href="{{ url_for('report_turnover') }}">Оборотная ведомость</a> /
+    Квартира {{ account_id }}
+</div>
+
 <div class="card">
     <h2>Оборотная ведомость по квартире {{ account_id }} за {{ year }} год</h2>
+
+    <form method="get" class="filter-form">
+        <label>
+            Квартира:
+            <input name="acc" type="number" value="{{ account_id }}"
+                   onchange="window.location='{{ url_for('report_account', account_id=0) }}'.replace('/0', '/' + this.value)">
+        </label>
+        <label>
+            Год:
+            <select name="year" onchange="this.form.submit()">
+                {% for y in [2023, 2024, 2025, 2026] %}
+                <option value="{{ y }}" {% if y == year %}selected{% endif %}>{{ y }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    </form>
+</div>
+
+<div class="card">
     <table>
         <thead>
             <tr>
@@ -22,8 +47,11 @@
                 <td>{{ r.deviation }}</td>
                 <td>{{ r.saldo_end }}</td>
             </tr>
+            {% else %}
+            <tr><td colspan="5" style="text-align:center;color:#888;">Нет данных</td></tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+
 {% endblock %}

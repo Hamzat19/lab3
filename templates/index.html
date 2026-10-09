@@ -1,15 +1,60 @@
 {% extends "base.html" %}
 {% block title %}Главная — lab3{% endblock %}
 {% block content %}
-<div class="card">
-    <h2>Лабораторная работа №3</h2>
-    <ul class="menu">
-        <li><a href="{{ url_for('charges') }}">Добавить начисление</a></li>
-        <li><a href="{{ url_for('payments') }}">Добавить платёж</a></li>
-        <li><a href="{{ url_for('saldo') }}">Ввести сальдо</a></li>
-        <li><a href="{{ url_for('report_turnover') }}">Оборотная ведомость</a></li>
-        <li><a href="{{ url_for('report_account', account_id=1) }}">Оборотная ведомость по квартире</a></li>
-        <li><a href="{{ url_for('report_debtors') }}">Сводка по должникам</a></li>
-    </ul>
+
+<div class="dashboard">
+    <div class="stat-card">
+        <div class="stat-icon">01</div>
+        <div class="stat-value">{{ stats.accounts }}</div>
+        <div class="stat-label">Квартир</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">02</div>
+        <div class="stat-value">{{ stats.total_charges }}</div>
+        <div class="stat-label">Начислений</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">03</div>
+        <div class="stat-value">{{ stats.total_payments }}</div>
+        <div class="stat-label">Платежей</div>
+    </div>
+    <div class="stat-card">
+        <div class="stat-icon">04</div>
+        <div class="stat-value">{{ "%.2f"|format(stats.total_debt) }}</div>
+        <div class="stat-label">Общий долг, руб.</div>
+    </div>
 </div>
+
+<h2 class="section-title">Ввод данных</h2>
+<div class="tile-grid">
+    <a href="{{ url_for('charges') }}" class="tile">
+        <div class="tile-title">Начисления</div>
+        <div class="tile-desc">Добавить начисление по лицевому счёту</div>
+    </a>
+    <a href="{{ url_for('payments') }}" class="tile">
+        <div class="tile-title">Платежи</div>
+        <div class="tile-desc">Зарегистрировать поступление платежа</div>
+    </a>
+    <a href="{{ url_for('saldo') }}" class="tile">
+        <div class="tile-title">Сальдо</div>
+        <div class="tile-desc">Ввести входящее сальдо на период</div>
+    </a>
+</div>
+
+<h2 class="section-title">Отчёты</h2>
+<div class="tile-grid">
+    <a href="{{ url_for('report_turnover') }}" class="tile">
+        <div class="tile-title">Оборотная ведомость</div>
+        <div class="tile-desc">Начисления, платежи и сальдо по всем квартирам за год</div>
+    </a>
+    <a href="{{ url_for('report_account', account_id=1) }}" class="tile">
+        <div class="tile-title">По квартире</div>
+        <div class="tile-desc">Детализация по одному лицевому счёту</div>
+    </a>
+    <a href="{{ url_for('report_debtors') }}" class="tile">
+        <div class="tile-title">Сводка по должникам</div>
+        <div class="tile-desc">Категории задолженности: 1, 2, 3, свыше 3 месяцев</div>
+    </a>
+</div>
+
 {% endblock %}

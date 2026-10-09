@@ -1,26 +1,83 @@
 {% extends "base.html" %}
-{% block title %}Платёж{% endblock %}
+{% block title %}Платежи{% endblock %}
 {% block content %}
-<div class="card">
-    <h2>Добавить платёж</h2>
-    <form method="post">
+
+<div class="breadcrumb">
+    <a href="{{ url_for('index') }}">Главная</a> /
+    Платежи
+</div>
+
+<div class="card accent-green">
+    <div class="card-header">
+        <h2>
+            <span class="card-icon icon-green">П</span>
+            Добавить платёж
+        </h2>
+        <span class="card-hint">Поля со звёздочкой обязательны</span>
+    </div>
+
+    {% if flash %}
+    <div class="flash {{ flash_type }}">{{ flash }}</div>
+    {% endif %}
+
+    <form method="post" class="form-grid">
         <label>
-            Квартира
-            <input name="account_id" type="number" required>
+            Квартира *
+            <input name="account_id" type="number" min="1" required>
         </label>
         <label>
-            Период
+            Период *
             <input name="period" type="month" required>
         </label>
         <label>
-            Сумма
-            <input name="amount" type="number" step="0.01" required>
+            Сумма *
+            <input name="amount" type="number" step="0.01" min="0" required>
         </label>
         <label>
-            Дата поступления
+            Дата поступления *
             <input name="pay_date" type="date" required>
         </label>
-        <button type="submit">Сохранить</button>
+        <label class="full">
+            № документа *
+            <input name="doc_number" required placeholder="ПД-001">
+        </label>
+
+        <div class="form-actions full">
+            <button type="submit" class="btn-green">Сохранить платёж</button>
+        </div>
     </form>
 </div>
+
+<div class="card">
+    <div class="card-header">
+        <h2>Последние платежи</h2>
+        <span class="card-hint">Показаны 10 последних записей</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Квартира</th>
+                <th>Период</th>
+                <th class="num">Сумма</th>
+                <th>Дата</th>
+                <th>№ документа</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in recent %}
+            <tr>
+                <td>{{ r.account_id }}</td>
+                <td>{{ r.period }}</td>
+                <td class="num">{{ r.amount }}</td>
+                <td>{{ r.pay_date }}</td>
+                <td>{{ r.doc_number or "—" }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="5" class="empty">Пока нет платежей</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}

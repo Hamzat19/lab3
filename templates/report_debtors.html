@@ -1,33 +1,56 @@
 {% extends "base.html" %}
 {% block title %}Должники{% endblock %}
 {% block content %}
-<div class="card">
-    <h2>Сводка по должникам на {{ period }}</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Квартира</th>
-                <th>Начислено за мес.</th>
-                <th>Сальдо</th>
-                <th>1 мес</th>
-                <th>2 мес</th>
-                <th>3 мес</th>
-                <th>&gt;3 мес</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for r in rows %}
-            <tr>
-                <td>{{ r.account_id }}</td>
-                <td>{{ r.last_charge }}</td>
-                <td>{{ r.saldo }}</td>
-                <td>{{ r.debt_1_month }}</td>
-                <td>{{ r.debt_2_months }}</td>
-                <td>{{ r.debt_3_months }}</td>
-                <td>{{ r.debt_over_3 }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+
+<div class="breadcrumb">
+    <a href="{{ url_for('index') }}">Главная</a> /
+    Сводка по должникам
 </div>
-{% endblock %}
+
+<div class="card">
+    ...
+
+    <div class="card">
+        <h2>Сводка по должникам на {{ period }}</h2>
+
+        <form method="get" class="filter-form">
+            <label>
+                Период:
+                <input name="period" type="date" value="{{ period }}"
+                       onchange="this.form.submit()">
+            </label>
+        </form>
+    </div>
+
+    <div class="card">
+        <table>
+            <thead>
+                <tr>
+                    <th>Квартира</th>
+                    <th>Начислено за мес.</th>
+                    <th>Сальдо</th>
+                    <th>1 мес</th>
+                    <th>2 мес</th>
+                    <th>3 мес</th>
+                    <th>&gt;3 мес</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in rows %}
+                <tr>
+                    <td>{{ r.account_id }}</td>
+                    <td>{{ r.last_charge }}</td>
+                    <td>{{ r.saldo }}</td>
+                    <td>{{ r.debt_1_month }}</td>
+                    <td>{{ r.debt_2_months }}</td>
+                    <td>{{ r.debt_3_months }}</td>
+                    <td>{{ r.debt_over_3 }}</td>
+                </tr>
+                {% else %}
+                <tr><td colspan="7" style="text-align:center;color:#888;">Нет данных</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    {% endblock %}

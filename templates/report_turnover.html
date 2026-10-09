@@ -1,8 +1,26 @@
 {% extends "base.html" %}
 {% block title %}Оборотная ведомость{% endblock %}
 {% block content %}
+<div class="breadcrumb">
+    <a href="{{ url_for('index') }}">Главная</a> /
+    Оборотная ведомость
+</div>
 <div class="card">
     <h2>Оборотная ведомость за {{ year }} год</h2>
+
+    <form method="get" class="filter-form">
+        <label>
+            Год:
+            <select name="year" onchange="this.form.submit()">
+                {% for y in [2023, 2024, 2025, 2026] %}
+                <option value="{{ y }}" {% if y == year %}selected{% endif %}>{{ y }}</option>
+                {% endfor %}
+            </select>
+        </label>
+    </form>
+</div>
+
+<div class="card">
     <table>
         <thead>
             <tr>
@@ -22,8 +40,11 @@
                 <td>{{ r.payments }}</td>
                 <td>{{ r.saldo_end }}</td>
             </tr>
+            {% else %}
+            <tr><td colspan="5" style="text-align:center;color:#888;">Нет данных за {{ year }} год</td></tr>
             {% endfor %}
         </tbody>
     </table>
 </div>
+
 {% endblock %}

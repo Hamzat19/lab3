@@ -20,15 +20,6 @@
         </nav>
     </header>
     <main>
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <ul class="flash">
-            {% for m in messages %}
-            <li>{{ m }}</li>{% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-
         {% block content %}{% endblock %}
     </main>
 </body>

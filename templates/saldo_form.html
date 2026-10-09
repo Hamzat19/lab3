@@ -1,26 +1,77 @@
 {% extends "base.html" %}
 {% block title %}Сальдо{% endblock %}
 {% block content %}
-<div class="card">
-    <h2>Ввести сальдо</h2>
-    <form method="post">
+
+<div class="breadcrumb">
+    <a href="{{ url_for('index') }}">Главная</a> /
+    Сальдо
+</div>
+
+<div class="card accent-orange">
+    <div class="card-header">
+        <h2>
+            <span class="card-icon icon-orange">С</span>
+            Ввод сальдо
+        </h2>
+        <span class="card-hint">Поля со звёздочкой обязательны</span>
+    </div>
+
+    {% if flash %}
+    <div class="flash {{ flash_type }}">{{ flash }}</div>
+    {% endif %}
+
+    <form method="post" class="form-grid">
         <label>
-            Квартира
-            <input name="account_id" type="number" required>
+            Квартира *
+            <input name="account_id" type="number" min="1" required>
         </label>
         <label>
-            Период
+            Период *
             <input name="period" type="month" required>
         </label>
         <label>
-            Сальдо на начало
+            Сальдо на начало *
             <input name="saldo_begin" type="number" step="0.01" required>
         </label>
         <label>
-            Сальдо на конец
+            Сальдо на конец *
             <input name="saldo_end" type="number" step="0.01" required>
         </label>
-        <button type="submit">Сохранить</button>
+
+        <div class="form-actions full">
+            <button type="submit" class="btn-orange">Сохранить сальдо</button>
+        </div>
     </form>
 </div>
+
+<div class="card">
+    <div class="card-header">
+        <h2>Последние записи</h2>
+        <span class="card-hint">Показаны 10 последних</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Квартира</th>
+                <th>Период</th>
+                <th class="num">Сальдо на начало</th>
+                <th class="num">Сальдо на конец</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for r in recent %}
+            <tr>
+                <td>{{ r.account_id }}</td>
+                <td>{{ r.period }}</td>
+                <td class="num">{{ r.saldo_begin }}</td>
+                <td class="num">{{ r.saldo_end }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4" class="empty">Пока нет записей</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
 {% endblock %}
