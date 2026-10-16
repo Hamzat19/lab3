@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}Загрузка выписки{% endblock %}
+{% block content %}
+
+<div class="breadcrumb">
+    <a href="{{ url_for('index') }}">Главная</a> /
+    <a href="{{ url_for('payments') }}">Платежи</a> /
+    Загрузка выписки
+</div>
+
+<div class="card accent-green">
+    <div class="card-header">
+        <h2>
+            <span class="card-icon icon-green">X</span>
+            Загрузить выписку из банка
+        </h2>
+        <span class="card-hint">Файл .xlsx</span>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for cat, msg in messages %}
+    <div class="flash {{ cat }}">{{ msg }}</div>
+    {% endfor %}
+    {% endwith %}
+
+    <form method="post" enctype="multipart/form-data" class="form-grid">
+        <label class="full">
+            Файл выписки *
+            <input name="file" type="file" accept=".xlsx,.xls" required>
+        </label>
+        <div class="form-actions full">
+            <button type="submit" class="btn-green">Загрузить и показать предпросмотр</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

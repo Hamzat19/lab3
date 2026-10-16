@@ -385,8 +385,15 @@ tbody tr:hover {
 .form-actions {
     display: flex;
     justify-content: flex-end;
-    margin-top: 8px;
+    gap: 12px; /* ← отступ между кнопками */
+    margin-top: 16px;
 }
+
+    .form-actions a.btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        border-radius: 4px;
+    }
 
 /* Правый край для чисел */
 td.num,
@@ -502,3 +509,80 @@ th.num {
 tbody tr:hover {
     background: #e3f2fd;
 }
+
+.input-mini {
+    width: 100px;
+    padding: 4px 6px;
+    font-size: 13px;
+    border: 1px solid #b0bec5;
+    border-radius: 3px;
+}
+
+.purpose {
+    max-width: 400px;
+    font-size: 12px;
+    color: #546e7a;
+    white-space: normal;
+    word-break: break-word;
+}
+
+.row-duplicate {
+    background: #fff8e1;
+}
+
+.badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.badge-ok {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.badge-warn {
+    background: #fff3e0;
+    color: #ef6c00;
+}
+
+.btn-secondary {
+    background: #eceff1;
+    color: #37474f;
+    border-color: #cfd8dc;
+}
+
+    .btn-secondary:hover {
+        background: #cfd8dc;
+        border-color: #b0bec5;
+    }
+
+a.btn,
+a.btn:visited {
+    display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 4px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background .15s, border-color .15s;
+}
+
+a.btn-green,
+a.btn-green:visited {
+    background: #2e7d32;
+    border-color: #2e7d32;
+    color: #fff;
+}
+
+    a.btn-green:hover {
+        background: #1b5e20;
+        border-color: #1b5e20;
+        color: #fff;
+    }

@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 {% block title %}Платежи{% endblock %}
 {% block content %}
-
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for cat, msg in messages %}
+<div class="flash {{ cat }}">{{ msg }}</div>
+    {% endfor %}
+{% endwith %}
 <div class="breadcrumb">
     <a href="{{ url_for('index') }}">Главная</a> /
     Платежи
 </div>
 
+{# --- Кнопка перехода к загрузке выписки --- #}
+<div class="card">
+    <a href="{{ url_for('payments_upload_form') }}" class="btn btn-green">
+        Загрузить выписку из Excel
+    </a>
+</div>
+
+{# --- Форма ручного ввода платежа --- #}
 <div class="card accent-green">
     <div class="card-header">
         <h2>
@@ -48,6 +60,7 @@
     </form>
 </div>
 
+{# --- Таблица последних платежей --- #}
 <div class="card">
     <div class="card-header">
         <h2>Последние платежи</h2>

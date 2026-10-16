@@ -31,6 +31,8 @@
     <Content Include="templates\charges_form.html" />
     <Content Include="templates\index.html" />
     <Content Include="templates\payments_form.html" />
+    <Content Include="templates\payments_upload.html" />
+    <Content Include="templates\payments_upload_preview.html" />
     <Content Include="templates\report_account.html" />
     <Content Include="templates\report_debtors.html" />
     <Content Include="templates\report_turnover.html" />
